@@ -31,8 +31,8 @@ func HandlerPredict(w http.ResponseWriter, r *http.Request) {
 
 	type HandlerPredictResp struct {
 		Result bool      `json:"result"`
-		Output []float32 `json:"output"`
-		Cause  string    `json:"cause"`
+		Output []float32 `json:"output,omitempty"`
+		Cause  string    `json:"cause,omitempty"`
 	}
 
 	var request HandlerPredictReq
