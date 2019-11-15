@@ -7,6 +7,7 @@ package model
 */
 import "C"
 import (
+	"reflect"
 	"unsafe"
 )
 
@@ -37,12 +38,12 @@ func (m *Eval) LoadModel(modelName string, outputSize int) int64 {
 // Evaluate runs the model and return the inferenced value
 func (m *Eval) Evaluate(pModel int64, x []float32) []float32 {
 	result := C.EvalEvaluate(m.eval, C.long(pModel), (*C.float)(unsafe.Pointer(&x[0])))
-	resultArray := (*[10]float32)(unsafe.Pointer(result))
 
 	var returnArray []float32
-	for i := 0; i < m.outputSize; i++ {
-		returnArray = append(returnArray, resultArray[i])
-	}
+	sliceHeader := (*reflect.SliceHeader)((unsafe.Pointer(&returnArray)))
+	sliceHeader.Cap = m.outputSize
+	sliceHeader.Len = m.outputSize
+	sliceHeader.Data = uintptr(unsafe.Pointer(result))
 
 	return returnArray
 }
