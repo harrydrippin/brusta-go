@@ -2,7 +2,8 @@
 # Brusta-Go
 + Language-agnostic PyTorch model serving
 + Serve JIT compiled PyTorch model in production environment
-+ [Brusta: original project with JVM support](https://github.com/hyoungseok/brusta/)
+
+> This project is an extension for [Brusta: original project with Scala/Java support](https://github.com/hyoungseok/brusta/)
 
 ## Requirements
 + docker == 18.09.1
